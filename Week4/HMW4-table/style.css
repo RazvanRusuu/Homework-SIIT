@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 2rem;
+  min-width: 30rem;
+  width: 40%;
+  background-color: #eee;
+}
+.container div {
+  height: 50px;
+  border-radius: 10px;
+}
+.yellow {
+  background-color: yellow;
+}
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+.top,
+.bottom {
+  grid-column: 1/-1;
+}
+.green.one {
+  grid-column: 1 / span 2;
+}
+.green.two {
+  grid-column: 3 / span 2;
+}

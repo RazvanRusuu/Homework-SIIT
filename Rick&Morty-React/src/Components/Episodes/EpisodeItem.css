@@ -1,0 +1,53 @@
+.episode-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.308);
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.episode-container:hover {
+  box-shadow: 0rem 1rem 2rem rgba(133, 176, 255, 0.267);
+}
+.episode-name {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 200;
+  margin-bottom: 2rem;
+}
+.fa-solid {
+  color: #f4fdff;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}
+.episode-date,
+.episode-number {
+  font-size: 1.7rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+.btn {
+  display: inline-block;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  background-color: var(--main-color_opacity);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  width: auto;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: auto;
+  cursor: pointer;
+
+  box-shadow: 0rem 1.5rem 1rem 0rem rgba(0, 0, 0, 0.603);
+}
+
+.btn:hover {
+  background-color: #2997ad;
+}
+.btn:active {
+  transform: translateY(+2px);
+  box-shadow: 0rem 1rem 1rem 0rem rgb(0, 0, 0);
+}

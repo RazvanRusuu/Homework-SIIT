@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;1,400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+
+  background-image: linear-gradient(
+      to top left,
+      rgba(19, 17, 2, 0.527),
+      #3333338e
+    ),
+    url(https://facts.net/wp-content/uploads/2020/11/rock-paper-scissors-730x487.jpg);
+  /* object-fit: cover; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(5px);
+}
+
+.container {
+  /* flex: 1 1; */
+  width: 70rem;
+  min-width: 30rem;
+  height: 45rem;
+  background-color: rgba(255, 245, 219, 0.295);
+  box-shadow: 1rem 1rem 2rem rgba(73, 73, 73, 0.4);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.player {
+  /* display: 100%; */
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.player:first-child {
+  border-right: 2px solid #fff;
+}
+.player-name {
+  margin-top: 4rem;
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+.score {
+  font-size: 2rem;
+  margin-top: 2rem;
+  color: #111;
+}
+
+.btn {
+  text-transform: uppercase;
+  position: absolute;
+  font-size: 4rem;
+  width: 13rem;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(to top left, rgb(75, 80, 72), rgb(110, 255, 26));
+}
+.btn--again {
+  bottom: 30%;
+}
+.btn--play {
+  bottom: 10%;
+}
+
+.img {
+  width: 20%;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.winner-label {
+  font-size: 5rem;
+  color: #fff;
+}
+.hidden {
+  display: none;
+}
+
+.player--winner {
+  background-color: rgb(89, 223, 0);
+}

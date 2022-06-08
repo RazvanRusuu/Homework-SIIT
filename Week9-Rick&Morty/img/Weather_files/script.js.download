@@ -1,0 +1,208 @@
+"use strict";
+const form = document.querySelector(".form");
+const container = document.querySelector(".figure__content");
+const city = document.querySelector(".input-city");
+
+const currentContainerEl = document.querySelector(".current__container");
+const todayContaierEl = document.querySelector(".today__container");
+const dailyContaierEl = document.querySelector(".daily__container");
+
+class WeatherApp {
+  #date = new Date();
+  #currentCoords;
+  #map;
+
+  getCurrentPosCoords = () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  };
+
+  getCityWeatherByName = async (city, time) => {
+    let data;
+    if (time === "current") {
+      data = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8f27e85eb6283722b3a654f4b16e0ea2`
+      );
+    } else
+      data = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8f27e85eb6283722b3a654f4b16e0ea2`
+      );
+    const response = await data.json();
+    return response;
+  };
+
+  getCityWeatherByCoord = async ([lat, lng], time) => {
+    let data;
+    if (time === "current") {
+      data = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=8f27e85eb6283722b3a654f4b16e0ea2`
+      );
+    } else
+      data = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=8f27e85eb6283722b3a654f4b16e0ea2`
+      );
+    const response = await data.json();
+    return response;
+  };
+
+  createDOMEl = (tagName, className = "", text = "") => {
+    const element = document.createElement(tagName);
+    element.className = className;
+    element.innerText = text;
+
+    return element;
+  };
+  getCityData = (city) => {
+    const cityWeatherCond = city.weather[0].description;
+    const cityWeatherCondImg = city.weather[0].icon;
+    const cityTemp = (city.main.temp - 273.15).toFixed(1);
+    const cityDate = new Date(city.dt_txt).getHours();
+
+    // prettier-ignore
+    const cityDateEl = this.createDOMEl('span', 'wheater__date', cityDate + '')
+    const cityWeatherEl = this.createDOMEl(
+      "span",
+      "weather__condition",
+      cityWeatherCond
+    );
+    const imageEl = this.createDOMEl("img", "weather__img current", "");
+    imageEl.src = `http://openweathermap.org/img/wn/${cityWeatherCondImg}@2x.png`;
+    // prettier-ignore
+    const cityTempEl = this.createDOMEl("span", "weather__temperature", `${cityTemp}°C`)
+
+    if (city.dt_txt) return [cityDateEl, cityWeatherEl, imageEl, cityTempEl];
+
+    return [cityWeatherEl, imageEl, cityTempEl];
+  };
+
+  constructor() {
+    this.#getLocation();
+    form.addEventListener("submit", this.#getCityInfo.bind(this));
+  }
+
+  #getLocation() {
+    this.getCurrentPosCoords().then((pos) => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      this.#currentCoords = [lat, lng];
+      this.#renderMap(this.#currentCoords);
+    });
+  }
+  #clickOnMap(mapE) {
+    const { lat, lng } = mapE.latlng;
+    this.getCityWeatherByCoord([lat, lng], "current").then((data) => {
+      this.#displayCurrentWeather(data);
+    });
+  }
+
+  #renderMap(coords) {
+    this.#map = L.map("map").setView(coords, 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
+    this.#map.on("click", this.#clickOnMap.bind(this));
+
+    this.getCityWeatherByCoord(this.#currentCoords, "current").then((city) => {
+      console.log(city);
+      this.#displayCurrentWeather(city);
+    });
+    this.getCityWeatherByCoord(this.#currentCoords).then((city) => {
+      this.#displayForecast(city);
+    });
+  }
+  #displayCurrentWeather(city) {
+    const cityName = city.name;
+    const cityNameEl = this.createDOMEl("h2", "city__name", cityName);
+    currentContainerEl.appendChild(cityNameEl);
+    const domElementsArr = this.getCityData(city);
+    for (const item of domElementsArr) {
+      currentContainerEl.appendChild(item);
+    }
+  }
+  #displayWeather(city, container) {
+    const domElementsArr = this.getCityData(city);
+    const containerInner = document.createElement("div");
+    container.appendChild(containerInner);
+    for (const item of domElementsArr) {
+      containerInner.append(item);
+    }
+  }
+  #displayForecast(cityForecast) {
+    const currentDay = this.#date.getDate();
+
+    const arr = cityForecast.list;
+
+    const todayArr = arr.filter((hour) => {
+      const day = new Date(hour.dt_txt).getDate();
+      return currentDay === day;
+    });
+    todayArr.forEach((hour) => {
+      this.#displayWeather(hour, todayContaierEl);
+    });
+
+    const daysArray = arr.filter((hour) => {
+      const day = new Date(hour.dt_txt).getDate();
+      return currentDay !== day;
+    });
+    daysArray.forEach((hour) => {
+      this.#displayWeather(hour, dailyContaierEl);
+    });
+  }
+
+  #getCityInfo(e) {
+    e.preventDefault();
+    const cityInput = city.value;
+    getCityWeatherByName(cityInput)
+      .then((cityData) => this.#manipulateData(cityData))
+      .catch((err) => console.log(err));
+
+    city.value = "";
+  }
+
+  #manipulateData(city) {
+    let currentHour = this.#date.getHours();
+    let currentDay = this.#date.getDate();
+
+    city.list.forEach((el) => {
+      const data = new Date(el.dt_txt);
+      const day = data.getDate();
+      const hour = data.getHours();
+    });
+
+    /*
+    const { lat, lon: lng } = city.coord;
+
+    const cityName = city.name;
+    const cityWeatherCond = city.weather[0].description;
+    const cityWeatherCondImg = city.weather[0].icon;
+
+    const cityTemp = (city.main.temp - 271.5).toFixed(1);
+    const cityNameEl = createDOMEl("h2", "", cityName);
+    const cityWeatherEl = createDOMEl(
+      "p",
+      "weather__condition",
+      cityWeatherCond
+    );
+    const imageEl = createDOMEl("img", "weather__img");
+    imageEl.src = `http://openweathermap.org/img/wn/${cityWeatherCondImg}@2x.png`;
+
+    const cityTempEl = createDOMEl("p", "weather__temperature", cityTemp);
+    // const dateEl = createDOMEl("p", "date", this.date + "");
+
+    container.appendChild(cityNameEl);
+    container.appendChild(cityWeatherEl);
+    container.appendChild(imageEl);
+    container.appendChild(cityTempEl);
+
+    this.#moveToCity([lat, lng]);
+
+    // this.#addMarkerOnMap([lat,lng])
+    */
+  }
+
+  #moveToCity(coords) {
+    this.#map.setView(coords, 13);
+  }
+}
+const weather = new WeatherApp();

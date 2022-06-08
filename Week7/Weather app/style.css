@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;1,400&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+body {
+  background-color: #eee;
+  color: #fff;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  max-width: 90rem;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#map {
+  width: 30rem;
+  height: 54rem;
+}
+
+.figure {
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto repeat(2, 15rem) auto;
+  /* height: 60rem; */
+  width: 30rem;
+  min-width: 25rem;
+  background-image: linear-gradient(
+      to top,
+      rgba(75, 235, 155, 0.699),
+      rgb(3, 77, 77)
+    ),
+    url(https://i1.sndcdn.com/artworks-000381979755-4jnb8b-t500x500.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: 2rem;
+
+  overflow: hidden;
+}
+.shadow {
+  box-shadow: 0 1rem 1rem 0.5rem rgba(0, 0, 0, 0.308);
+}
+input {
+  font-size: 1.6rem;
+  color: #999;
+  padding: 1rem;
+  align-self: end;
+  width: 70%;
+  margin: 0 auto;
+  /* text-transform: uppercase; */
+
+  border: none;
+  border-radius: 10px;
+}
+input:focus {
+  outline: 2px solid rgba(9, 255, 0, 0.829);
+}
+input::placeholder {
+  font-size: 1.4rem;
+  color: #999;
+  font-weight: 500;
+  font-style: italic;
+}
+
+h2 {
+  margin-top: 3rem;
+  font-size: 4rem;
+  justify-self: center;
+  align-self: center;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+
+  transition: all 1s;
+  transform: translateY(2rem);
+
+  animation: slide 3s linear infinite;
+}
+
+img {
+  width: 15rem;
+  grid-row: 3/4;
+  justify-self: center;
+  align-self: start;
+}
+.weather__temperature {
+  font-size: 7rem;
+
+  margin-top: -10rem;
+}
+.weather__condition {
+  font-size: 2rem;
+}
+.date {
+  font-size: 1.6rem;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-300px);
+  }
+
+  100% {
+    transform: translateX(+300px);
+  }
+}

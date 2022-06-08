@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #333;
+}
+
+.container {
+  max-width: 50%;
+  min-width: 50rem;
+  height: 50rem;
+  background-color: rgba(238, 238, 238, 0.445);
+  padding: 10rem;
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-window {
+  max-width: 32rem;
+  position: relative;
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0.5rem 0.5rem 3rem rgba(0, 0, 0, 0.2);
+}
+.modal-heading {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+.btn {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 3rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+label,
+input {
+  display: inline-block;
+  color: #333;
+  line-height: 1.5;
+}
+
+label {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+input {
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+}
+input:focus {
+  outline: none;
+}
+.btn-box {
+  text-align: right;
+}
+
+button[type="submit"],
+button[type="button"] {
+  font-size: 1.6rem;
+  border: none;
+  background: none;
+  display: inline-block;
+  cursor: pointer;
+}
+button[type="submit"] {
+  padding: 0.7rem;
+  background-color: rgba(69, 36, 255, 0.795);
+  border-radius: 2px;
+  margin-right: 1rem;
+  color: #fff;
+}
+button[type="button"] {
+  color: rgba(69, 36, 255, 0.795);
+}

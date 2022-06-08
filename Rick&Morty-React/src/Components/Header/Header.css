@@ -1,0 +1,63 @@
+.header {
+  overflow: hidden;
+  text-align: center;
+  height: 100vh;
+  position: relative;
+  max-width: 150rem;
+  min-width: 50rem;
+  margin: 0 auto 9rem;
+}
+.logo {
+  display: inline-block;
+  margin-top: 3rem;
+  transition: all 1s ease;
+  animation: slideY 2s;
+  width: 70rem;
+}
+.img-morty,
+.img-rick {
+  top: 50%;
+  width: 20rem;
+  position: absolute;
+  filter: grayscale(0.5);
+}
+.img-rick {
+  left: 40%;
+  transform: translateX(-100%);
+  animation: slideXleft 2s;
+}
+.img-morty {
+  right: 40%;
+  transform: translateX(+100%);
+  animation: slideYright 2s;
+}
+
+@keyframes slideY {
+  0% {
+    transform: translateY(-100rem);
+    width: 1rem;
+  }
+
+  100% {
+    transform: translateY(0);
+    width: 70rem;
+  }
+}
+@keyframes slideXleft {
+  0% {
+    transform: translateX(-50rem);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slideYright {
+  0% {
+    transform: translateX(50rem);
+  }
+
+  100% {
+    transform: translateX(+100%);
+  }
+}

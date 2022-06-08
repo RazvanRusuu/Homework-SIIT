@@ -1,0 +1,11 @@
+.grid-2--cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.heading-secondary {
+  font-size: 6rem;
+  font-weight: 400;
+  text-align: center;
+  grid-column: 1 / -1;
+  margin-bottom: 2rem;
+}

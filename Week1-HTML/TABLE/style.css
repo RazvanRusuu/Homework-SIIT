@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+td {
+  background-color: aqua;
+  padding: 2rem;
+  border-radius: 5px;
+}
+table {
+  border-spacing: 0.8rem;
+  width: 100%;
+}
+.yellow {
+  background-color: #ffff00;
+}
+.green {
+  background: #095f30;
+}
+
+.container {
+  background-color: #f3f2f2;
+  padding: 2rem;
+  max-width: 60rem;
+  margin: 10rem auto;
+  border-radius: 1rem;
+}

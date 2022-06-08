@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+
+  background-image: linear-gradient(45deg, #2533b1, rgb(88, 168, 189));
+}
